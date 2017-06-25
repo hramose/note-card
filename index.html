@@ -3,20 +3,43 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Card Notes</title>
+    <title>Note Cards</title>
     <script src="https://unpkg.com/vue"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="http://davidtkatz.com/public_css/noteMaster.css">
 </head>
 <body>
-    <div id="app">
+    <div class="container" id="app" style="margin: auto;">
         <h3>{{ title }}</h3>
+        <div class="row">
+            <div class="col-xs-4 note" v-for="note in notes">
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">{{ note.title }}</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ note.time }}</h6>
+                        <p class="card-text">{{ note.body }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
     var app = new Vue({
         el: '#app',
         data: {
-            title: 'Notemaster'
+            title: 'Note Cards',
+            notes: [
+                {
+                    title: 'Belajar Vue',
+                    body: 'Membuat kartu catatan (note card) dengan vuejs.',
+                    time: new Date(Date.now()).toLocaleString()
+                },
+                {
+                    title: 'Catatan Kedua',
+                    body: 'Membuat Single Page Application dengan Vuejs.',
+                    time: new Date(Date.now()).toLocaleString()
+                },
+            ]
         }
     })
     </script>
