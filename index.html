@@ -12,6 +12,27 @@
     <div class="container" id="app" style="margin: auto;">
         <h3>{{ title }}</h3>
         <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form @submit.prevent="addNote">
+                            <div class="form-group">
+                                <label for="title" class="control-label">Title</label>
+                                <input type="text" id="title" v-model="note.title" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="body" class="control-label">Body</label>
+                                <textarea type="text" id="body" v-model="note.body" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-info" :disabled="note.title == ''">Add Note</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-xs-4 note" v-for="note in notes">
                 <div class="card">
                     <div class="card-block">
@@ -28,6 +49,10 @@
         el: '#app',
         data: {
             title: 'Note Cards',
+            note: {
+                title: '',
+                body: ''
+            },
             notes: [
                 {
                     title: 'Belajar Vue',
@@ -40,6 +65,19 @@
                     time: new Date(Date.now()).toLocaleString()
                 },
             ]
+        },
+        methods: {
+            addNote () {
+                this.notes.unshift({
+                    title: this.note.title,
+                    body: this.note.body,
+                    time: new Date(Date.now()).toLocaleString()
+                })
+                this.note = {
+                    title: '',
+                    body: ''
+                }
+            }
         }
     })
     </script>
